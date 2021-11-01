@@ -16,7 +16,8 @@ def parse_args():
                         help="Github에서 사용하는 User ID를 입력해주세요.")
     parser.add_argument('--github_token', dest='token', type=str, required=True,
                         help="Github에서 발급받은 OAuth token을 입력해주세요.")
-
+    parser.add_argument('--title', type=str, required=True,
+                        help="검색할 논문의 제목을 입력해주세요.")
     args = parser.parse_args()
     return args
 
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     github_servicer = GithubAPIServicer(user_id=args.user_id, token=args.token)
 
     # Search papers with title
-    query_title = "Sphere Generative Adversarial Network Based on Geometric Moment Matching"
+    query_title = args.title
     paper_items = paperswithcode_servicer.search_with_title(
         query_title, only_official=True)
     print(f"{query_title}에 해당하는 github repo들을 확인해볼까요?")
