@@ -37,7 +37,9 @@ if __name__ == "__main__":
     for paper_item in paper_items:
         try:
             repo_url = paper_item['repo_url']
-            github_stars = github_servicer.get_github_star(repo_url)
-            print(f"{repo_url} 에 해당하는 github star는 {github_stars} 개입니다!")
+            github_stars, github_views, github_forks, github_issues = github_servicer.get_github_star(
+                repo_url)
+            print(
+                f"{repo_url}의 github stars는 {github_stars}개, views는 {github_views}개, forks는 {github_forks}개, issues는 {github_issues}개 입니다!")
         except RuntimeError as e:
             print(e)
