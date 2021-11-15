@@ -24,13 +24,22 @@ class PapersWithCodeDataServicer:
 
     @staticmethod
     def _only_official_github(items):
+
+        # temp_list = []
+        # for item in items:
+        #     if item['is_official']:
+        #         temp_list.append(item)
+
+        # return temp_list
+
         return [item for item in items if item['is_official']]
 
     def print_paper_list(self, max_item_number=MAX_ITEM_NUMBER):
-        paper_list = [paper_item['paper_title'] for paper_item in self.json_data[:max_item_number]]
-        
+        paper_list = [paper_item['paper_title']
+                      for paper_item in self.json_data[:max_item_number]]
+
         return paper_list
-    
+
     def search_with_title(self, title: str, exact=True, only_official=False):
         """title이 실제 Paperswithcode json 파일 내에 있는 지 확인합니다.
 
@@ -43,7 +52,7 @@ class PapersWithCodeDataServicer:
             list[dict]: 결과 item(dict)을 담은 list
         """
         items = [paper_item for paper_item in self.json_data
-                       if match_title(paper_item['paper_title'], title, exact=exact)]
+                 if match_title(paper_item['paper_title'], title, exact=exact)]
 
         if only_official:
             return self._only_official_github(items)
