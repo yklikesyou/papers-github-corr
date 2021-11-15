@@ -4,3 +4,5 @@ __pycache__/
 
 main.sh
 links-between-papers-and-code.json
+cvpr2020.csv
+CVPRpapers_github_metrics.csv

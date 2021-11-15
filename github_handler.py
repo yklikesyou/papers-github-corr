@@ -15,7 +15,7 @@ class GithubAPIServicer:
                 f"Can't get response from {api_url}!!! status_code: {response.status_code}")
 
         response_data = response.json()
-        return response_data['stargazers_count'], response_data['watchers_count'], response_data['forks_count'], response_data['open_issues_count']
+        return response_data['stargazers_count'], response_data['subscribers_count'], response_data['forks_count'], response_data['open_issues_count']
 
     def get_github_star(self, github_url: str):
 
@@ -26,5 +26,5 @@ class GithubAPIServicer:
 
         username, repo = github_url.split("/")[-2:]
         api_url = get_github_api_url(username, repo)
-        stars, views, forks, issues = self._get_star_from_api(api_url)
-        return stars, views, forks, issues
+        stars, watchers, forks, issues = self._get_star_from_api(api_url)
+        return stars, watchers, forks, issues

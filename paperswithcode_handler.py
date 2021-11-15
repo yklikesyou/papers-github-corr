@@ -54,7 +54,14 @@ class PapersWithCodeDataServicer:
         items = [paper_item for paper_item in self.json_data
                  if match_title(paper_item['paper_title'], title, exact=exact)]
 
-        if only_official:
-            return self._only_official_github(items)
-        else:
-            return items
+        if len(items) != 0:
+            if only_official:
+                official_item = self._only_official_github(items)
+                if len(official_item) == 1:
+                    return official_item
+                else:  # len(official_item) == 0 or len(official_item) > 1
+                    return []
+            else:
+                return items
+        else:  # len(items) == 0, which means NotFound!
+            return []
